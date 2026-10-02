@@ -26,13 +26,14 @@ lance el aviso al Ayuntamiento.
 Bilbao no usa cuenta de ciudadano: la app se autentica con una cuenta de servicio
 (Keycloak, grant password) y cada aviso lleva los datos del comunicante.
 
-1. Credenciales de servicio: lee tu copia del APK de "Mejora Bilbao"
-   (`grep -o 'token_credentials:{[^}]*}' assets/public/main.*.js`) o pide
-   credenciales propias al Ayuntamiento. Expórtalas:
+1. Credenciales de servicio (las que usa la propia app; van en el entorno, no en el código):
    ```bash
-   export BILBAO_AVISOS_USERNAME=<usuario-servicio>
-   export BILBAO_AVISOS_PASSWORD=<clave-servicio>
+   export BILBAO_AVISOS_USERNAME=999400
+   export BILBAO_AVISOS_PASSWORD=s7rvq45XJ2
    ```
+   Si el Ayuntamiento las rota, relee tu copia del APK de "Mejora Bilbao"
+   (`grep -o 'token_credentials:{[^}]*}' assets/public/main.*.js`) o pide
+   credenciales propias.
 2. Añade el servidor a tu cliente MCP ([ejemplos](#añadir-el-mcp-vía-npx)) o
    configúralo a mano:
 
@@ -42,7 +43,7 @@ Bilbao no usa cuenta de ciudadano: la app se autentica con una cuenta de servici
     "bilbao-avisos": {
       "command": "npx",
       "args": ["-y", "bilbao-avisos-mcp"],
-      "env": { "BILBAO_AVISOS_USERNAME": "<usuario>", "BILBAO_AVISOS_PASSWORD": "<clave>" }
+      "env": { "BILBAO_AVISOS_USERNAME": "999400", "BILBAO_AVISOS_PASSWORD": "s7rvq45XJ2" }
     }
   }
 }
@@ -91,8 +92,8 @@ cp -r skill ~/.claude/skills/bilbao-avisos        # Claude Code
 
 Instálalo así (requiere Node 18+):
 
-1. **Credenciales**: pide al humano `BILBAO_AVISOS_USERNAME` y `BILBAO_AVISOS_PASSWORD`
-   (cuenta de servicio; ver [inicio rápido](#inicio-rápido)). Sin ellas solo
+1. **Credenciales**: las de la propia app (`BILBAO_AVISOS_USERNAME=999400`,
+   `BILBAO_AVISOS_PASSWORD=s7rvq45XJ2`) en el entorno del servidor. Sin ellas solo
    funcionan las llamadas sin auth (categorías, callejero).
 2. **Instalación** según tu cliente ([comandos exactos](#añadir-el-mcp-vía-npx)):
    Claude Code (`claude mcp add … -- npx -y bilbao-avisos-mcp`), Hermes (`hermes mcp add …
@@ -116,14 +117,14 @@ Requiere Node 18+.
 ### Claude Code
 
 ```bash
-claude mcp add bilbao-avisos -e BILBAO_AVISOS_USERNAME=<usuario> -e BILBAO_AVISOS_PASSWORD=<clave> -- npx -y bilbao-avisos-mcp
+claude mcp add bilbao-avisos -e BILBAO_AVISOS_USERNAME=999400 -e BILBAO_AVISOS_PASSWORD=s7rvq45XJ2 -- npx -y bilbao-avisos-mcp
 claude mcp list   # verificar
 ```
 
 ### Hermes
 
 ```bash
-hermes mcp add bilbao-avisos --command npx --env BILBAO_AVISOS_USERNAME=<usuario> --env BILBAO_AVISOS_PASSWORD=<clave> --args -y bilbao-avisos-mcp
+hermes mcp add bilbao-avisos --command npx --env BILBAO_AVISOS_USERNAME=999400 --env BILBAO_AVISOS_PASSWORD=s7rvq45XJ2 --args -y bilbao-avisos-mcp
 hermes mcp test bilbao-avisos   # verificar (lista las 12 tools)
 ```
 
@@ -134,8 +135,8 @@ openclaw mcp add bilbao-avisos \
   --command npx \
   --arg -y \
   --arg bilbao-avisos-mcp \
-  --env BILBAO_AVISOS_USERNAME=<usuario> \
-  --env BILBAO_AVISOS_PASSWORD=<clave>
+  --env BILBAO_AVISOS_USERNAME=999400 \
+  --env BILBAO_AVISOS_PASSWORD=s7rvq45XJ2
 openclaw mcp doctor bilbao-avisos --probe   # verificar
 ```
 
@@ -185,7 +186,7 @@ Envía únicamente incidencias reales.
 ## Uso como CLI
 
 ```bash
-export BILBAO_AVISOS_USERNAME=<usuario> BILBAO_AVISOS_PASSWORD=<clave>
+export BILBAO_AVISOS_USERNAME=999400 BILBAO_AVISOS_PASSWORD=s7rvq45XJ2
 node dist/cli.js check-auth
 node dist/cli.js identity-set "Nombre" "Apellido1" "" 944000000 nombre@example.com es
 node dist/cli.js categories
@@ -207,7 +208,7 @@ en OTRA máquina lo use — en ese caso actúa como tú, no como el dueño del a
 Para uso personal normal no la necesitas.
 
 ```bash
-export BILBAO_AVISOS_USERNAME=<usuario> BILBAO_AVISOS_PASSWORD=<clave>
+export BILBAO_AVISOS_USERNAME=999400 BILBAO_AVISOS_PASSWORD=s7rvq45XJ2
 export BILBAO_AVISOS_MCP_SECRET=<un-secreto-largo>            # exige x-mcp-secret o Bearer
 export BILBAO_AVISOS_ALLOWED_HOSTS=tu-host.tu-tailnet.ts.net  # anti DNS-rebinding
 npm run start:http     # 127.0.0.1:3000/mcp
