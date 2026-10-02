@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+*.log
+.tokens.json
+*.tokens.json
+# Perfil de identidad del ciudadano (datos personales: no versionar)
+.identity.json
+*.identity.json
+__pycache__/
+*.pyc
+.DS_Store
+# Fotos de usuarios (no versionar incidencias)
+*.jpg
+*.jpeg
+*.png
+*.heic
