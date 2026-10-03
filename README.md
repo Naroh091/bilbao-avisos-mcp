@@ -234,3 +234,7 @@ nunca `funnel`): quien llegue a la URL actúa como tu usuario. Para persistencia
 - Ingeniería inversa del APK "Mejora Bilbao - Bilbo Hobetuz" v4.0.0 + verificación
   en vivo de los endpoints de lectura y del dry-run (sin crear avisos reales).
 - Si el Ayuntamiento rota la cuenta de servicio, actualiza las variables de entorno.
+
+## Licencia
+
+AGPLv3. Ver [LICENSE](LICENSE).
